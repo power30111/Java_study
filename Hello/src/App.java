@@ -1,5 +1,8 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        String [] numbers={"one","two","three"};
+        for(int i=0; i<numbers.length;i++){
+            System.out.println(numbers[i]);
+        }
     }
 }

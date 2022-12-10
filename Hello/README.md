@@ -20,3 +20,4 @@ The `JAVA PROJECTS` view allows you to manage your dependencies. More details ca
 src=사람이 작성한 코드(이해할수있는 코드라고 생각)
 bin=기계가 이해할수있는코드?머 그런거
 https://wikidocs.net/191
+git config --global core.autocrlf true  LF or 뭐그런거 뜰떄.
