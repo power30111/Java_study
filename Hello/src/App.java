@@ -1,8 +1,19 @@
+class Updater {
+    void update(Counter counter) {
+        counter.count++;
+    }
+}
+
+class Counter {
+    int count = 0;  // 객체변수
+}
+
 public class App {
-    public static void main(String[] args) throws Exception {
-        String [] numbers={"one","two","three"};
-        for(int i=0; i<numbers.length;i++){
-            System.out.println(numbers[i]);
-        }
+    public static void main(String[] args) {
+        Counter myCounter = new Counter();
+        System.out.println("before update:"+myCounter.count);
+        Updater myUpdater = new Updater();
+        myUpdater.update(myCounter);
+        System.out.println("after update:"+myCounter.count);
     }
 }
