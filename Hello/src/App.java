@@ -1,3 +1,4 @@
+
 class Updater {
     void update(Counter counter) {
         counter.count++;
