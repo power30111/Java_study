@@ -1,7 +1,10 @@
 package user;
-//이런식으로 구현하는것을 java bin ? 이라고한다.
+//이런식으로 구현하는것을 java bean ? 이라고한다.
 
 public class User {
+    public User(){
+
+    }
     private String userID;
     private String userPassword;
     private String userName;
