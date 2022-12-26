@@ -1,8 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="bbs.BbsDAO" %>
-<%@ page import="bbs.Bbs" %>
-<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 
 <html>
@@ -17,12 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
     <title>게시판 JSP</title>
-<style type ="text/css">
-	a, a:hover{
-		color: #000000;
-		text-decoration: none;
-	}
-</style>
+
 </head>
 
 <body>
@@ -32,10 +24,7 @@
 		if (session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
-		int pageNumber =1;
-		if (request.getParameter("pageNumber")!=null){
-			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-		}
+		
 	%>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -83,49 +72,28 @@
   </nav>
 	<div class="container">
 		<div class="row">
+		<form method="post" action="writeAction.jsp">
 			<table class = "table table-striped" style="text-align : center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align:center;">번호</th>
-						<th style="background-color: #eeeeee; text-align:center;">제목</th>
-						<th style="background-color: #eeeeee; text-align:center;">작성자</th>
-						<th style="background-color: #eeeeee; text-align:center;">작성일</th>
+						<th colspan="2" style="background-color: #eeeeee; text-align:center;">게시판 글쓰기 양식</th>
+			
 						
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						BbsDAO bbsDAO = new BbsDAO();
-						ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
-						for (int i=0; i<list.size(); i++){
-					%>
 					<tr>
-						<td><%= list.get(i).getBbsID() %></td>
-						<td><a href="view.jsp?bbsID=<%= list.get(i).getBbsID() %>"><%= list.get(i).getBbsTitle() %></a></td>
-						<td><%= list.get(i).getUserID() %></td>
-						<td><%= list.get(i).getBbsDate().substring(0,11) + list.get(i).getBbsDate().substring(11,13)+"시"+list.get(i).getBbsDate().substring(14,16)+"분" %></td>
+						<td><input type="text" class="form-control" placeholder="글 제목" name="bbsTitle" maxlength="50"></td>
 					</tr>
-					<%
-						}
-					%>
+					<tr>
+						<td><textarea class="form-control" placeholder="글 내용" name="bbsContent" maxlength="2048" rows="20px"></textarea></td>
+					</tr>
 				</tbody>
 				
 			</table>
+			<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+		</form>
 		</div>
-			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-			<%
-				if (pageNumber != 1){
-			%>
-				<a href = "bbs.jsp?pageNumber=<%=pageNumber-1%>" class="btn btn-success btn-arrow-left">이전</a>
-			<%
-				}if (bbsDAO.nextPage(pageNumber+1)){
-			%>
-				<a href = "bbs.jsp?pageNumber=<%=pageNumber+1%>" class="btn btn-success btn-arrow-left">다음</a>
-			<%
-				}
-			%>	
-			  <button class="btn btn-primary" type="button" onclick="location='write.jsp'">글쓰기</button>
-			</div>
 		
 	</div>
 
